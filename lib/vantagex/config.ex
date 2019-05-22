@@ -7,6 +7,7 @@ defmodule Vantagex.Config do
     [
       # THIS ARE ALL OF THE PARAMS ALLOWED ACROSS ALL OF ALPHA VANTAGE'S FUNCTIONS
       :symbol,
+      :symbols,
       :interval,
       :outputsize,
       :datatype,
@@ -56,6 +57,7 @@ defmodule Vantagex.Config do
       "TIME_SERIES_MONTHLY",
       "TIME_SERIES_MONTHLY_ADJUSTED",
       "GLOBAL_QUOTE",
+      "BATCH_STOCK_QUOTES",
       "SYMBOL_SEARCH",
       "CURRENCY_EXCHANGE_RATE",
       "FX_INTRADAY",

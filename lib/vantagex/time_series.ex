@@ -469,6 +469,18 @@ defmodule Vantagex.TimeSeries do
     resolve_request(:global_quote, params)
   end
 
+  @spec batch_quote([String.t()], Keyword.t()) :: String.t() | Map.t()
+  def batch_quote(symbols, opts \\ []) do
+    params =
+      %{
+        symbols: symbols |> Enum.join(","),
+        datatype: Keyword.get(opts, :datatype)
+      }
+      |> clean_params()
+
+    resolve_request(:batch_stock_quotes, params)
+  end
+
   @doc """
   Uses Alpha Vantage's `SYMBOL_SEARCH` function.
   Returns the best-matching symbols based on the passed keywords.
@@ -546,6 +558,8 @@ defmodule Vantagex.TimeSeries do
     add_group_prefix(function, key)
   end
 
-  defp add_group_prefix(f, key) when f in [:global_quote, :symbol_search], do: key
+  defp add_group_prefix(f, key) when f in [:global_quote, :symbol_search, :batch_stock_quotes],
+    do: key
+
   defp add_group_prefix(_f, key), do: "#{@module_id}_#{key}"
 end
