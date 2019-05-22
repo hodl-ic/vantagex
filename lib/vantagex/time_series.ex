@@ -61,12 +61,14 @@ defmodule Vantagex.TimeSeries do
   """
   @spec intraday(String.t(), integer(), Keyword.t()) :: String.t() | Map.t()
   def intraday(symbol, interval, opts \\ []) do
-    params = %{
-      symbol: symbol,
-      interval: "#{interval}min",
-      outputsize: Keyword.get(opts, :outputsize),
-      datatype: Keyword.get(opts, :datatype)
-    } |> clean_params()
+    params =
+      %{
+        symbol: symbol,
+        interval: "#{interval}min",
+        outputsize: Keyword.get(opts, :outputsize),
+        datatype: Keyword.get(opts, :datatype)
+      }
+      |> clean_params()
 
     resolve_request(:intraday, params)
   end
@@ -118,11 +120,13 @@ defmodule Vantagex.TimeSeries do
   """
   @spec daily(String.t(), Keyword.t()) :: String.t() | Map.t()
   def daily(symbol, opts \\ []) do
-    params = %{
-      symbol: symbol,
-      outputsize: Keyword.get(opts, :outputsize),
-      datatype: Keyword.get(opts, :datatype)
-    } |> clean_params()
+    params =
+      %{
+        symbol: symbol,
+        outputsize: Keyword.get(opts, :outputsize),
+        datatype: Keyword.get(opts, :datatype)
+      }
+      |> clean_params()
 
     resolve_request(:daily, params)
   end
@@ -180,11 +184,13 @@ defmodule Vantagex.TimeSeries do
   """
   @spec daily_adjusted(String.t(), Keyword.t()) :: String.t() | Map.t()
   def daily_adjusted(symbol, opts \\ []) do
-    params = %{
-      symbol: symbol,
-      outputsize: Keyword.get(opts, :outputsize),
-      datatype: Keyword.get(opts, :datatype)
-    } |> clean_params()
+    params =
+      %{
+        symbol: symbol,
+        outputsize: Keyword.get(opts, :outputsize),
+        datatype: Keyword.get(opts, :datatype)
+      }
+      |> clean_params()
 
     resolve_request(:daily_adjusted, params)
   end
@@ -233,11 +239,13 @@ defmodule Vantagex.TimeSeries do
   """
   @spec weekly(String.t(), Keyword.t()) :: String.t() | Map.t()
   def weekly(symbol, opts \\ []) do
-    params = %{
-      symbol: symbol,
-      outputsize: Keyword.get(opts, :outputsize),
-      datatype: Keyword.get(opts, :datatype)
-    } |> clean_params()
+    params =
+      %{
+        symbol: symbol,
+        outputsize: Keyword.get(opts, :outputsize),
+        datatype: Keyword.get(opts, :datatype)
+      }
+      |> clean_params()
 
     resolve_request(:weekly, params)
   end
@@ -290,11 +298,13 @@ defmodule Vantagex.TimeSeries do
   """
   @spec weekly_adjusted(String.t(), Keyword.t()) :: String.t() | Map.t()
   def weekly_adjusted(symbol, opts \\ []) do
-    params = %{
-      symbol: symbol,
-      outputsize: Keyword.get(opts, :outputsize),
-      datatype: Keyword.get(opts, :datatype)
-    } |> clean_params()
+    params =
+      %{
+        symbol: symbol,
+        outputsize: Keyword.get(opts, :outputsize),
+        datatype: Keyword.get(opts, :datatype)
+      }
+      |> clean_params()
 
     resolve_request(:weekly_adjusted, params)
   end
@@ -343,11 +353,13 @@ defmodule Vantagex.TimeSeries do
   """
   @spec monthly(String.t(), Keyword.t()) :: String.t() | Map.t()
   def monthly(symbol, opts \\ []) do
-    params = %{
-      symbol: symbol,
-      outputsize: Keyword.get(opts, :outputsize),
-      datatype: Keyword.get(opts, :datatype)
-    } |> clean_params()
+    params =
+      %{
+        symbol: symbol,
+        outputsize: Keyword.get(opts, :outputsize),
+        datatype: Keyword.get(opts, :datatype)
+      }
+      |> clean_params()
 
     resolve_request(:monthly, params)
   end
@@ -400,11 +412,13 @@ defmodule Vantagex.TimeSeries do
   """
   @spec monthly_adjusted(String.t(), Keyword.t()) :: String.t() | Map.t()
   def monthly_adjusted(symbol, opts \\ []) do
-    params = %{
-      symbol: symbol,
-      outputsize: Keyword.get(opts, :outputsize),
-      datatype: Keyword.get(opts, :datatype)
-    } |> clean_params()
+    params =
+      %{
+        symbol: symbol,
+        outputsize: Keyword.get(opts, :outputsize),
+        datatype: Keyword.get(opts, :datatype)
+      }
+      |> clean_params()
 
     resolve_request(:monthly_adjusted, params)
   end
@@ -445,10 +459,12 @@ defmodule Vantagex.TimeSeries do
   """
   @spec quote(String.t(), Keyword.t()) :: String.t() | Map.t()
   def quote(symbol, opts \\ []) do
-    params = %{
-      symbol: symbol,
-      datatype: Keyword.get(opts, :datatype)
-    } |> clean_params()
+    params =
+      %{
+        symbol: symbol,
+        datatype: Keyword.get(opts, :datatype)
+      }
+      |> clean_params()
 
     resolve_request(:global_quote, params)
   end
@@ -499,17 +515,19 @@ defmodule Vantagex.TimeSeries do
   """
   @spec symbol_search(String.t(), Keyword.t()) :: String.t() | Map.t()
   def symbol_search(keywords, opts \\ []) do
-    params = %{
-      keywords: keywords,
-      datatype: Keyword.get(opts, :datatype)
-    } |> clean_params()
+    params =
+      %{
+        keywords: keywords,
+        datatype: Keyword.get(opts, :datatype)
+      }
+      |> clean_params()
 
     resolve_request(:symbol_search, params)
   end
 
   defp clean_params(params) do
     params
-    |> Enum.reject(&(is_nil(elem(&1, 1))))
+    |> Enum.reject(&is_nil(elem(&1, 1)))
     |> Map.new()
   end
 
@@ -520,9 +538,10 @@ defmodule Vantagex.TimeSeries do
   end
 
   defp get_function_name(function) do
-    key = function
-          |> to_string()
-          |> String.upcase()
+    key =
+      function
+      |> to_string()
+      |> String.upcase()
 
     add_group_prefix(function, key)
   end
